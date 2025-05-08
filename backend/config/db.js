@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Define MongoDB connection URI manually
-const MONGO_URI = "mongodb://${{secrets.HOST}}:27017/kavi";
+const MONGO_URI = "mongodb://${{secrets.USER}}:${{secrets.KEY}}@${{secrets.HOST}}:27017/kavi";
 
 const connectDB = async () => {
   try {
