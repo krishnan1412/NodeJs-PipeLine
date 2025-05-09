@@ -21,11 +21,6 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Install react-scripts
-        run: |
-          cd frontend
-          npm install react-scripts --save
-
       - name: Install Frontend Dependencies
         run: |
           cd frontend
@@ -55,7 +50,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.KEY }}
-          source: "frontend/dist/*"
+          source: "frontend/build/*"
           target: "/var/www/html"
 
       - name: Restart PM2 Process
