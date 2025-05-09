@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Define MongoDB connection URI manually
-const MONGO_URI = "mongodb://ubuntu:ubuntu@3.110.84.224:27017/kavi";
+const MONGO_URI = "mongodb://ubuntu:ubuntu@127.0.0.1:27017/kavi";
 
 const connectDB = async () => {
   try {
