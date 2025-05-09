@@ -24,14 +24,12 @@ jobs:
       - name: Install react-scripts
         run: |
           cd frontend
-          npx react-scripts start
-
-      - name: Update the npm 
-        run: npm install -g npm@latest
+          npm install react-scripts --save
 
       - name: Install Frontend Dependencies
         run: |
           cd frontend
+          npm install
           npm run build
 
       - name: Install PM2
@@ -57,10 +55,11 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.KEY }}
-          source: "./dist/*"
+          source: "frontend/dist/*"
           target: "/var/www/html"
 
       - name: Restart PM2 Process
         run: |
-          pm2 restart node-app
+          pm2 list
+          pm2 restart node-app || pm2 start backend/server.js --name "node-app"
           pm2 save
