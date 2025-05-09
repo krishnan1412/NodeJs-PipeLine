@@ -1,4 +1,4 @@
-name: CI/CD Pipeline for Node.js with Apache2
+name: CI/CD Pipeline for Node.js with Apache2 and PM2
 
 on:
   push:
@@ -21,8 +21,14 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Application
-        run: npm start
+      - name: Install PM2
+        run: npm install -g pm2
+
+      - name: Start Application with PM2
+        run: pm2 start backend/server.js --name "node-app"
+
+      - name: Save PM2 Process
+        run: pm2 save
 
   deploy:
     needs: build
@@ -41,6 +47,7 @@ jobs:
           source: "."
           target: "/var/www/html"
 
-      - name: Restart Apache Server
+      - name: Restart PM2 Process
         run: |
-          sudo systemctl restart apache2
+          pm2 restart node-app
+          pm2 save
