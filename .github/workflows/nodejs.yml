@@ -24,7 +24,10 @@ jobs:
       - name: Install react-scripts
         run: |
           cd frontend
-          npm react-scripts start
+          npx react-scripts start
+
+      - name: Update the npm 
+        run: npm install -g npm@latest
 
       - name: Install Frontend Dependencies
         run: |
