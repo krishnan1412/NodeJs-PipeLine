@@ -21,6 +21,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm run build
+
       - name: Install PM2
         run: npm install -g pm2
 
@@ -44,7 +49,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.KEY }}
-          source: "."
+          source: "./dist/*"
           target: "/var/www/html"
 
       - name: Restart PM2 Process
